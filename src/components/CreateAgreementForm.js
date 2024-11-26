@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { ethers, ContractFactory } from 'ethers';
-import CustomERC20Token from '../contracts/CustomERC20Token.json'; // Asegúrate de tener la ABI del contrato
+import { ethers } from 'ethers';
+import PersonalAgreement from '../contracts/PersonalAgreement.json'; // Asegúrate de tener la ABI del contrato
 import styled from 'styled-components';
 
 const FormContainer = styled.div`
@@ -58,81 +58,61 @@ const Button = styled.button`
   }
 `;
 
-const DeployTokenForm = () => {
-  const [name, setName] = useState("");
-  const [symbol, setSymbol] = useState("");
-  const [initialSupply, setInitialSupply] = useState("");
+const CreateAgreementForm = () => {
+  const [party2, setParty2] = useState('');
+  const [terms, setTerms] = useState('');
 
-  const handleDeploy = async (e) => {
+  const handleCreateAgreement = async (e) => {
     e.preventDefault();
 
-    // Verificar que Metamask está instalado
     if (typeof window.ethereum === 'undefined') {
-      alert("Metamask no está instalado. Por favor, instálalo para continuar.");
+      alert('MetaMask no está instalado. Por favor, instálalo para continuar.');
       return;
     }
 
     try {
-      // Solicitar acceso a la cuenta de Metamask
       await window.ethereum.request({ method: 'eth_requestAccounts' });
-      
+
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
 
-      // Definir el contrato a desplegar
-      const factory = new ContractFactory(
-        CustomERC20Token.abi,
-        CustomERC20Token.bytecode,
-        signer
-      );
+      const contractAddress = '0x02CDC38B6FeCC7A5673e4BDa09b3D0896FA365F2'; // Reemplaza con la dirección del contrato desplegado
+      const personalAgreement = new ethers.Contract(contractAddress, PersonalAgreement.abi, signer);
 
-      // Desplegar el contrato con los argumentos ingresados
-      const contract = await factory.deploy(
-        name,
-        symbol,
-        ethers.parseUnits(initialSupply, 18)
-      );
-      await contract.waitForDeployment();
+      const tx = await personalAgreement.createAgreement(party2, terms);
+      await tx.wait();
 
-      alert(`Contrato desplegado exitosamente en la dirección: ${contract.target}`);
+      alert('Acuerdo creado exitosamente');
     } catch (error) {
-      console.error("Error desplegando el contrato:", error);
-      alert("Error desplegando el contrato. Revisa la consola para más detalles.");
+      console.error('Error creando el acuerdo:', error);
+      alert('Error creando el acuerdo. Revisa la consola para más detalles.');
     }
   };
 
   return (
     <FormContainer>
-      <Title>Desplegar Token</Title>
-      <form onSubmit={handleDeploy}>
+      <Title>Crear Acuerdo Personal</Title>
+      <form onSubmit={handleCreateAgreement}>
         <div>
-          <label>Nombre del Token:</label>
+          <label>Dirección de la otra parte:</label>
           <Input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={party2}
+            onChange={(e) => setParty2(e.target.value)}
           />
         </div>
         <div>
-          <label>Símbolo del Token:</label>
+          <label>Términos del Acuerdo:</label>
           <Input
             type="text"
-            value={symbol}
-            onChange={(e) => setSymbol(e.target.value)}
+            value={terms}
+            onChange={(e) => setTerms(e.target.value)}
           />
         </div>
-        <div>
-          <label>Suministro Inicial:</label>
-          <Input
-            type="text"
-            value={initialSupply}
-            onChange={(e) => setInitialSupply(e.target.value)}
-          />
-        </div>
-        <Button type="submit">Desplegar Token</Button>
+        <Button type="submit">Crear Acuerdo</Button>
       </form>
     </FormContainer>
   );
 };
 
-export default DeployTokenForm;
+export default CreateAgreementForm;

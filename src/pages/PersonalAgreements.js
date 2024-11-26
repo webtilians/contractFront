@@ -1,10 +1,9 @@
-// src/pages/NFT.js
 import React from 'react';
-import DeployNFTForm from '../components/DeployNFTForm';
-import TransferNFTForm from '../components/TransferNFTForm';
+import CreateAgreementForm from '../components/CreateAgreementForm';
+import SignAgreementForm from '../components/SignAgreementForm';
 import styled from 'styled-components';
 
-const NFTContainer = styled.div`
+const AgreementsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,14 +21,14 @@ const Title = styled.h1`
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 `;
 
-const NFT = () => {
+const PersonalAgreements = () => {
   return (
-    <NFTContainer>
-      <Title>NFT Marketplace</Title>
-      <DeployNFTForm />
-      <TransferNFTForm />
-    </NFTContainer>
+    <AgreementsContainer>
+      <Title>Acuerdos Personales</Title>
+      <CreateAgreementForm />
+      <SignAgreementForm />
+    </AgreementsContainer>
   );
 };
 
-export default NFT;
+export default PersonalAgreements;

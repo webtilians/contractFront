@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ethers } from 'ethers';
-import MyBasicNFT from '../contracts/MyBasicNFT.json'; // Asegúrate de tener la ABI del contrato
+import PersonalAgreement from '../contracts/PersonalAgreement.json'; // Asegúrate de tener la ABI del contrato
 import styled from 'styled-components';
 
 const FormContainer = styled.div`
@@ -58,68 +58,52 @@ const Button = styled.button`
   }
 `;
 
-const TransferNFTForm = () => {
-  const [tokenId, setTokenId] = useState("");
-  const [recipient, setRecipient] = useState("");
+const SignAgreementForm = () => {
+  const [agreementId, setAgreementId] = useState('');
 
-  const handleTransferNFT = async (e) => {
+  const handleSignAgreement = async (e) => {
     e.preventDefault();
 
     if (typeof window.ethereum === 'undefined') {
-      alert("Metamask no está instalado. Por favor, instálalo para continuar.");
+      alert('MetaMask no está instalado. Por favor, instálalo para continuar.');
       return;
     }
 
     try {
       await window.ethereum.request({ method: 'eth_requestAccounts' });
-      
+
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
 
-      const nftContract = new ethers.Contract(
-        MyBasicNFT.address,
-        MyBasicNFT.abi,
-        signer
-      );
+      const contractAddress = '0x02CDC38B6FeCC7A5673e4BDa09b3D0896FA365F2'; // Reemplaza con la dirección del contrato desplegado
+      const personalAgreement = new ethers.Contract(contractAddress, PersonalAgreement.abi, signer);
 
-      const transaction = await nftContract['safeTransferFrom(address,address,uint256)'](
-        signer.getAddress(),
-        recipient,
-        tokenId
-      );
-      await transaction.wait();
+      const tx = await personalAgreement.signAgreement(agreementId);
+      await tx.wait();
 
-      alert(`NFT transferido exitosamente al destinatario: ${recipient}`);
+      alert('Acuerdo firmado exitosamente');
     } catch (error) {
-      console.error("Error transfiriendo NFT:", error);
-      alert("Error transfiriendo NFT. Revisa la consola para más detalles.");
+      console.error('Error firmando el acuerdo:', error);
+      alert('Error firmando el acuerdo. Revisa la consola para más detalles.');
     }
   };
 
   return (
     <FormContainer>
-      <Title>Transferir NFT</Title>
-      <form onSubmit={handleTransferNFT}>
+      <Title>Firmar Acuerdo Personal</Title>
+      <form onSubmit={handleSignAgreement}>
         <div>
-          <label>ID del Token:</label>
+          <label>ID del Acuerdo:</label>
           <Input
             type="text"
-            value={tokenId}
-            onChange={(e) => setTokenId(e.target.value)}
+            value={agreementId}
+            onChange={(e) => setAgreementId(e.target.value)}
           />
         </div>
-        <div>
-          <label>Destinatario:</label>
-          <Input
-            type="text"
-            value={recipient}
-            onChange={(e) => setRecipient(e.target.value)}
-          />
-        </div>
-        <Button type="submit">Transferir NFT</Button>
+        <Button type="submit">Firmar Acuerdo</Button>
       </form>
     </FormContainer>
   );
 };
 
-export default TransferNFTForm;
+export default SignAgreementForm;

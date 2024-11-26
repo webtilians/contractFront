@@ -8,6 +8,7 @@ import Exchange from './pages/Exchange';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import NFT from './pages/NFT';
+import PersonalAgreements from './pages/PersonalAgreements';
 import { useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -113,6 +114,9 @@ const AppContent = () => {
             <NavLink to="/nft"><span>NFT</span></NavLink>
           </NavItem>
           <NavItem>
+            <NavLink to="/PersonalAgreements"><span>Contratos personales</span></NavLink>
+          </NavItem>
+          <NavItem>
             <NavLink to="/login"><span>Login</span></NavLink>
           </NavItem>
         </NavList>
@@ -132,6 +136,7 @@ const AppContent = () => {
             }
           />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/PersonalAgreements" element={<PersonalAgreements />} />
           <Route
             path="/nft"
             element={
@@ -140,6 +145,7 @@ const AppContent = () => {
               </PrivateRoute>
             }
           />
+          
         </Routes>
       </MainContent>
     </>
