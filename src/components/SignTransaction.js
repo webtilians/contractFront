@@ -16,15 +16,31 @@ const SignTransactionContainer = styled.div`
 
 const FormContainer = styled.div`
   background-color: ${props => props.theme.colors.base1};
-  
+  padding: 7rem;
   border: 2px solid ${props => props.theme.colors.base2};
-     padding: 6rem;
-    border: 2px solid rgb(41, 42, 51);
-    clip-path: polygon(38% -6%, 75% 6%, 100% 43%, 74% 95%, 24% 88%, 2% 45%);
-    width: 420px;
-    max-width: 90%;
-    margin: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  clip-path: polygon(26% 7%, 64% 1%, 99% 44%, 70% 95%, 30% 95%, 0% 50%); /* Crear la forma de hexágono irregular */
+  width: 400px;
+  max-width: 90%;
+  margin: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+
+  /* Efecto 3D */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(103deg, rgba(218, 234, 255, 0.05), rgba(34, 15, 0, 0.2));
+    clip-path: polygon(30% 5%, 70% 5%, 100% 50%, 70% 95%, 30% 95%, 0% 50%);
+    z-index: -1;
+    transform: translate(-3px, 7px);
+    box-shadow: 0 44px 44px rgba(0, 0, 0, 0.2);
+
+  }
 `;
 
 const Title = styled.h1`

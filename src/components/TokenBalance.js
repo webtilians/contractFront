@@ -17,20 +17,29 @@ const BalanceContainer = styled.div`
 
 const FormContainer = styled.div`
   background-color: ${props => props.theme.colors.base1};
-  padding: 2rem;
+  padding: 7rem;
   border: 2px solid ${props => props.theme.colors.base2};
-  clip-path: polygon(
-    25% 5%, 
-    75% 5%, 
-    100% 50%, 
-    75% 95%, 
-    25% 95%, 
-    0% 50%
-  ); /* Crear la forma de hexágono deformado */
+  clip-path: polygon(26% 7%, 64% 1%, 99% 44%, 70% 95%, 30% 95%, 0% 50%);
   width: 400px;
   max-width: 90%;
   margin: 1rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(103deg, rgba(218, 234, 255, 0.05), rgba(34, 15, 0, 0.2));
+    clip-path: polygon(30% 5%, 70% 5%, 100% 50%, 70% 95%, 30% 95%, 0% 50%);
+    z-index: -1;
+    transform: translate(-3px, 7px);
+    box-shadow: 0 44px 44px rgba(0, 0, 0, 0.2);
+  }
 `;
 
 const Title = styled.h2`
