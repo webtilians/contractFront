@@ -1,21 +1,18 @@
 const hre = require("hardhat");
 
 async function main() {
-  console.log("deploy.js");
   const [deployer] = await hre.ethers.getSigners();
 
-  console.log("Desplegando contratos con la cuenta:", deployer.address);
-  const PersonalAgreement = await hre.ethers.getContractFactory("PersonalAgreement");
+  console.log("Desplegando contratos con la cuenta:", await deployer.getAddress());
+  const PersonalAgreement = await hre.ethers.getContractFactory("PersonalAgreement", deployer);
   const personalAgreement = await PersonalAgreement.deploy();
 
-  await personalAgreement.deployed();
+  await personalAgreement.waitForDeployment();
 
-  console.log("PersonalAgreement deployed to:", personalAgreement.address);
+  console.log("PersonalAgreement desplegado en:", personalAgreement.target);
 }
 
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
