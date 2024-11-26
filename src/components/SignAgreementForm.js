@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ethers } from 'ethers';
 import PersonalAgreement from '../contracts/PersonalAgreement.json'; // Asegúrate de tener la ABI del contrato
 import styled from 'styled-components';
+import { CONTRACT_ADDRESSES } from '../config';
 
 const FormContainer = styled.div`
   background-color: ${props => props.theme.colors.base1};
@@ -75,8 +76,11 @@ const SignAgreementForm = () => {
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
 
-      const contractAddress = '0x02CDC38B6FeCC7A5673e4BDa09b3D0896FA365F2'; // Reemplaza con la dirección del contrato desplegado
-      const personalAgreement = new ethers.Contract(contractAddress, PersonalAgreement.abi, signer);
+      const personalAgreement = new ethers.Contract(
+        CONTRACT_ADDRESSES.personalAgreement,
+        PersonalAgreement.abi,
+        signer
+      );
 
       const tx = await personalAgreement.signAgreement(agreementId);
       await tx.wait();

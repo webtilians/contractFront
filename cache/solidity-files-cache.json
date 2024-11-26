@@ -873,6 +873,42 @@
       "artifacts": [
         "PersonalAgreement"
       ]
+    },
+    "C:\\Users\\ENRIQUE\\token-exchange-frontend\\contracts\\Marketplace.sol": {
+      "lastModificationDate": 1732658736650,
+      "contentHash": "932cace66d69542a09d24d086ae857d5",
+      "sourceName": "contracts/Marketplace.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "Marketplace"
+      ]
     }
   }
 }

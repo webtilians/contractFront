@@ -9,6 +9,8 @@ import Profile from './pages/Profile';
 import Login from './pages/Login';
 import NFT from './pages/NFT';
 import PersonalAgreements from './pages/PersonalAgreements';
+import ListItemForm from './components/ListItemForm';
+import ItemList from './components/ItemList';
 import { useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -20,7 +22,7 @@ const Container = styled.div`
   color: white;
   min-height: 100vh;
   display: flex;
-  background-image: url('/assets/backgroundhomme.webp');
+  background-image: url('/assets/backhome.webp');
   background-size: cover;
   background-position: center;
   position: relative;
@@ -117,6 +119,12 @@ const AppContent = () => {
             <NavLink to="/PersonalAgreements"><span>Contratos personales</span></NavLink>
           </NavItem>
           <NavItem>
+            <NavLink to="/list-item"><span>Listar Artículo</span></NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/items"><span>Ver Artículos</span></NavLink>
+          </NavItem>
+          <NavItem>
             <NavLink to="/login"><span>Login</span></NavLink>
           </NavItem>
         </NavList>
@@ -145,7 +153,8 @@ const AppContent = () => {
               </PrivateRoute>
             }
           />
-          
+          <Route path="/list-item" element={<ListItemForm />} />
+          <Route path="/items" element={<ItemList />} />
         </Routes>
       </MainContent>
     </>
