@@ -5,21 +5,43 @@ import { CONTRACT_ADDRESSES } from '../config.js';
 import styled from 'styled-components';
 
 const FormContainer = styled.div`
-  background-color: ${props => props.theme.colors.base1};
-  padding: 2rem;
-  border: 2px solid ${props => props.theme.colors.base2};
-  clip-path: polygon(
-    25% 5%, 
-    75% 5%, 
-    100% 50%, 
-    75% 95%, 
-    25% 95%, 
-    0% 50%
-  ); /* Crear la forma de hexágono deformado */
-  width: 400px;
-  max-width: 90%;
-  margin: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+    width: 100%;
+    padding: 62px;
+    height: 400px;
+    background: linear-gradient(135deg, rgb(25 46 55), rgba(0, 121, 145, 1));
+    
+    clip-path: polygon(47% -3%, 99% 30%, 88% 74%, 38% 92%, 8% 76%, 0% 24%);
+    box-shadow: 0 0 15px rgb(50 167 164);
+    background: repeating-radial-gradient(#193438, transparent 122px);
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    width: 35%;
+    height: 57%;
+    background: inherit;
+    border: inherit;
+    clip-path: inherit;
+    transform: translateY(-50%) rotate(30deg);
+    top: 182px;
+    left: 176px;
+    z-index: -8;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    
+    background: inherit;
+    border: inherit;
+    clip-path: inherit;
+    transform: translateY(-57%) rotate(0deg);
+    
+    top: 225px;
+    left: 14px;
+    opacity: 0.4;
+    z-index: -1;
+  }
 `;
 
 const Title = styled.h1`

@@ -26,28 +26,15 @@ const Container = styled.div`
   background-size: cover;
   background-position: center;
   position: relative;
-  z-index: 1; /* Asegura que el fondo esté detrás del nav */
+  // z-index: 1; /* Asegura que el fondo esté detrás del nav */
 `;
 
 const Nav = styled.nav`
-  padding: 1rem;
-  max-width: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  background-image: url('/assets/fondonav.png');
-  background-size: cover;
-  background-position: center;
-  z-index: 10; /* Asegura que el nav esté por encima del fondo */
-  background-color: ${props => props.theme.colors.base2};
+  
 `;
 
 const MainContent = styled.div`
-  margin-left: 30vw;
+  // margin-left: 30vw;
   padding: 1rem;
   flex: 1;
 `;
@@ -76,7 +63,7 @@ const NavLink = styled(Link)`
   z-index: 1;
   transition: all 0.3s ease;
   width: 100px; /* Ajustar el tamaño del hexágono */
-  height: 57.74px; /* Ajustar el tamaño del hexágono */
+  height: 40px; /* Ajustar el tamaño del hexágono */
   display: flex;
   align-items: center;
   justify-content: center;

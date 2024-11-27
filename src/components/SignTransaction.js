@@ -14,33 +14,69 @@ const SignTransactionContainer = styled.div`
   font-family: 'Roboto', sans-serif; /* Puedes cambiar esto a cualquier fuente sofisticada que prefieras */
 `;
 
-const FormContainer = styled.div`
-  background-color: ${props => props.theme.colors.base1};
-  padding: 7rem;
-  border: 2px solid ${props => props.theme.colors.base2};
-  clip-path: polygon(26% 7%, 64% 1%, 99% 44%, 70% 95%, 30% 95%, 0% 50%); /* Crear la forma de hexágono irregular */
-  width: 400px;
-  max-width: 90%;
-  margin: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+const Hexagon = styled.div`
   position: relative;
-  overflow: hidden;
+  width: 120px;
+  height: 69.28px;
+  background: linear-gradient(135deg, rgba(38, 191, 227, 1), rgba(0, 121, 145, 1)); /* Azul degradado */
+  border: 4px solid rgba(255, 255, 255, 0.6); /* Bordes blancos translúcidos */
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.8); /* Brillo */
 
-  /* Efecto 3D */
-  &::before {
+  &::before, &::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(103deg, rgba(218, 234, 255, 0.05), rgba(34, 15, 0, 0.2));
-    clip-path: polygon(30% 5%, 70% 5%, 100% 50%, 70% 95%, 30% 95%, 0% 50%);
-    z-index: -1;
-    transform: translate(-3px, 7px);
-    box-shadow: 0 44px 44px rgba(0, 0, 0, 0.2);
-
+    // width: 100%;
+    // height: 100%;
+    background: inherit;
+    border: inherit;
+    clip-path: inherit;
+    transform: translateY(-50%) rotate(30deg);
   }
+
+  &::after {
+    transform: translateY(50%) rotate(-30deg);
+  }
+`;
+
+const FormContainer = styled.div`
+    position: relative;
+    width: 100%;
+    padding: 62px;
+    height: 400px;
+    background: linear-gradient(135deg, rgb(25 46 55), rgba(0, 121, 145, 1));
+    clip-path: polygon(47% -3%, 99% 30%, 88% 74%, 38% 92%, 8% 76%, 0% 24%);
+    box-shadow: 0 0 15px rgb(50 167 164);
+    background: repeating-radial-gradient(#193438, #245a5e 323px);
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    width: 35%;
+    height: 57%;
+    background: inherit;
+    border: inherit;
+    clip-path: inherit;
+    transform: translateY(-50%) rotate(30deg);
+    top: 182px;
+    left: 176px;
+    z-index: -8;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    
+    background: inherit;
+    border: inherit;
+    clip-path: inherit;
+    transform: translateY(-57%) rotate(0deg);
+    
+    top: 225px;
+    left: 14px;
+    opacity: 0.4;
+    z-index: -1;
+  }
+        
 `;
 
 const Title = styled.h1`
@@ -115,7 +151,8 @@ const SignTransaction = () => {
   };
 
   return (
-    <SignTransactionContainer>
+    <SignTransactionContainer> 
+      
       <FormContainer>
         <Title>Firmar Transacción</Title>
         <Input
