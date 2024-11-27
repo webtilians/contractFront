@@ -16,6 +16,9 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RegisterForm from './components/RegistrerForm';
 import ConnectWallet from './components/ConnectWallet';
+import TokenSwap from './components/TokenSwap';
+import TournamentList from './components/TournamentList';
+import CreateTournament from './components/CreateTournament';
 
 const Container = styled.div`
   background-color: ${props => props.theme.colors.base1};
@@ -34,9 +37,11 @@ const Nav = styled.nav`
 `;
 
 const MainContent = styled.div`
-  // margin-left: 30vw;
-  padding: 1rem;
-  flex: 1;
+ align-items: center;
+    justify-content: center;
+    display: flex;
+    flex:1;
+;
 `;
 
 const NavList = styled.ul`
@@ -97,6 +102,9 @@ const AppContent = () => {
             <NavLink to="/exchange"><span>Exchange</span></NavLink>
           </NavItem>
           <NavItem>
+            <NavLink to="/swap"><span>Intercambiar Tokens</span></NavLink>
+          </NavItem>
+          <NavItem>
             <NavLink to="/profile"><span>Profile</span></NavLink>
           </NavItem>
           <NavItem>
@@ -110,6 +118,12 @@ const AppContent = () => {
           </NavItem>
           <NavItem>
             <NavLink to="/items"><span>Ver Artículos</span></NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/tournaments"><span>Torneos</span></NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/create-tournament"><span>Crear Torneo</span></NavLink>
           </NavItem>
           <NavItem>
             <NavLink to="/login"><span>Login</span></NavLink>
@@ -130,6 +144,7 @@ const AppContent = () => {
               </PrivateRoute>
             }
           />
+          <Route path="/swap" element={<TokenSwap />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/PersonalAgreements" element={<PersonalAgreements />} />
           <Route
@@ -142,6 +157,8 @@ const AppContent = () => {
           />
           <Route path="/list-item" element={<ListItemForm />} />
           <Route path="/items" element={<ItemList />} />
+          <Route path="/tournaments" element={<TournamentList />} />
+          <Route path="/create-tournament" element={<CreateTournament />} />
         </Routes>
       </MainContent>
     </>

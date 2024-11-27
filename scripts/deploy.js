@@ -1,14 +1,19 @@
 const hre = require("hardhat");
 
 async function main() {
-  const Marketplace = await hre.ethers.getContractFactory("Marketplace");
-  const marketplace = await Marketplace.deploy();
+  // Compilar el contrato si no está compilado
+  await hre.run('compile');
 
-  await marketplace.waitForDeployment();
+  // Obtener el contrato a desplegar
+  const Tournament = await hre.ethers.getContractFactory("Tournament");
+  const tournament = await Tournament.deploy();
 
-  console.log("Marketplace desplegado en:", marketplace.target);
+  await tournament.waitForDeployment();
+
+  console.log("tournament desplegado en:", tournament.target);
 }
 
+// Manejar errores y ejecutar la función principal
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;

@@ -47,7 +47,7 @@ const FormContainer = styled.div`
     background: linear-gradient(135deg, rgb(25 46 55), rgba(0, 121, 145, 1));
     clip-path: polygon(47% -3%, 99% 30%, 88% 74%, 38% 92%, 8% 76%, 0% 24%);
     box-shadow: 0 0 15px rgb(50 167 164);
-    background: repeating-radial-gradient(#193438, #245a5e 323px);
+    background: repeating-radial-gradient(#193438, #95b0b2 340px);
   &::before, &::after {
     content: '';
     position: absolute;

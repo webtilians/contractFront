@@ -95,6 +95,8 @@ const TransferTokenForm = () => {
       // Solicitar acceso a la cuenta de Metamask
       await window.ethereum.request({ method: 'eth_requestAccounts' });
       const provider = new ethers.BrowserProvider(window.ethereum);
+      const network = await provider.getNetwork();
+      console.log('Conectado a la red:', network.chainId);
       const signer = await provider.getSigner();
 
       // Crear una instancia del contrato utilizando la ABI y la dirección del contrato

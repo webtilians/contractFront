@@ -909,6 +909,42 @@
       "artifacts": [
         "Marketplace"
       ]
+    },
+    "C:\\Users\\ENRIQUE\\token-exchange-frontend\\contracts\\Tournament.sol": {
+      "lastModificationDate": 1732744111577,
+      "contentHash": "df3f9c1d11598841445549c65dc33a86",
+      "sourceName": "contracts/Tournament.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Tournament"
+      ]
     }
   }
 }
