@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ethers } from 'ethers';
 import MyBasicNFT from '../contracts/MyBasicNFT.json'; // Asegúrate de tener la ABI del contrato
 import styled from 'styled-components';
-
+const nftAddress = '0x1234567890abcdef1234567890abcdef12345678';
 const FormContainer = styled.div`
   position: relative;
     width: 100%;
@@ -87,8 +87,8 @@ const TransferNFTForm = () => {
   const handleTransferNFT = async (e) => {
     e.preventDefault();
 
-    if (typeof window.ethereum === 'undefined') {
-      alert("Metamask no está instalado. Por favor, instálalo para continuar.");
+    if (!window.ethereum) {
+      alert('MetaMask no está instalado');
       return;
     }
 
@@ -98,23 +98,21 @@ const TransferNFTForm = () => {
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
 
-      const nftContract = new ethers.Contract(
-        MyBasicNFT.address,
-        MyBasicNFT.abi,
-        signer
-      );
+      const contract = new ethers.Contract(nftAddress, MyBasicNFT.abi, signer);
 
-      const transaction = await nftContract['safeTransferFrom(address,address,uint256)'](
-        signer.getAddress(),
+      const transaction = await contract['safeTransferFrom(address,address,uint256)'](
+        await signer.getAddress(),
         recipient,
         tokenId
       );
-      await transaction.wait();
+      console.log('Transferencia de NFT enviada, esperando confirmación...');
 
-      alert(`NFT transferido exitosamente al destinatario: ${recipient}`);
+      await transaction.wait();
+      console.log('NFT transferido');
+      alert('¡NFT transferido exitosamente!');
     } catch (error) {
-      console.error("Error transfiriendo NFT:", error);
-      alert("Error transfiriendo NFT. Revisa la consola para más detalles.");
+      console.error('Error al transferir el NFT:', error);
+      alert(`Error: ${error.message}`);
     }
   };
 

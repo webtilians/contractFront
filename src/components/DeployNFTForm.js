@@ -80,59 +80,55 @@ const Button = styled.button`
   }
 `;
 
+const nftAddress = '0x950A5e4eC44C712CFe232A6E9bD548f3FA84bF53'; // Reemplaza con la dirección del contrato desplegado
+
 const DeployNFTForm = () => {
-  const [name, setName] = useState('');
-  const [symbol, setSymbol] = useState('');
+  const [recipient, setRecipient] = useState('');
+  const [tokenURI, setTokenURI] = useState('');
 
-  const handleDeploy = async (e) => {
-    e.preventDefault();
-
-    if (typeof window.ethereum === 'undefined') {
-      alert('MetaMask no está instalado. Por favor, instálalo para continuar.');
+  const handleDeployNFT = async () => {
+    if (!window.ethereum) {
+      alert('MetaMask no está instalado');
       return;
     }
 
     try {
       await window.ethereum.request({ method: 'eth_requestAccounts' });
-
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
-      const signerAddress = await signer.getAddress(); // Obtener la dirección del signer
 
-      const nftContractFactory = new ContractFactory(
-        MyBasicNFT.abi,
-        MyBasicNFT.bytecode,
-        signer
-      );
+      const contract = new ethers.Contract(nftAddress, MyBasicNFT.abi, signer);
 
-      const nftContract = await nftContractFactory.deploy(name, symbol, signerAddress);
-      await nftContract.waitForDeployment();
+      const transaction = await contract.safeMint(recipient, tokenURI);
+      console.log('Despliegue de NFT enviado, esperando confirmación...');
 
-      alert(`Contrato NFT desplegado en: ${nftContract.target}`);
+      await transaction.wait();
+      console.log('NFT desplegado');
+      alert('¡NFT desplegado exitosamente!');
     } catch (error) {
-      console.error('Error desplegando el contrato NFT:', error);
-      alert('Error desplegando el contrato NFT. Revisa la consola para más detalles.');
+      console.error('Error al desplegar el NFT:', error);
+      alert(`Error: ${error.message}`);
     }
   };
 
   return (
     <FormContainer>
       <Title>Desplegar NFT</Title>
-      <form onSubmit={handleDeploy}>
+      <form onSubmit={(e) => { e.preventDefault(); handleDeployNFT(); }}>
         <div>
-          <label>Nombre del Token:</label>
+          <label>Dirección del Destinatario:</label>
           <Input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={recipient}
+            onChange={(e) => setRecipient(e.target.value)}
           />
         </div>
         <div>
-          <label>Símbolo del Token:</label>
+          <label>Token URI:</label>
           <Input
             type="text"
-            value={symbol}
-            onChange={(e) => setSymbol(e.target.value)}
+            value={tokenURI}
+            onChange={(e) => setTokenURI(e.target.value)}
           />
         </div>
         <Button type="submit">Desplegar NFT</Button>

@@ -1,19 +1,23 @@
 const hre = require("hardhat");
 
 async function main() {
-  // Compilar el contrato si no está compilado
   await hre.run('compile');
 
-  // Obtener el contrato a desplegar
-  const Tournament = await hre.ethers.getContractFactory("Tournament");
-  const tournament = await Tournament.deploy();
+  // Obtén el signer (cuenta) que desplegará el contrato
+  const [deployer] = await hre.ethers.getSigners();
+  const initialOwner = deployer.address; // Puedes usar la dirección del deployer o cualquier otra dirección
 
-  await tournament.waitForDeployment();
+  // Obtén la fábrica del contrato
+  const MyBasicNFT = await hre.ethers.getContractFactory("MyNFT");
 
-  console.log("tournament desplegado en:", tournament.target);
+  // Despliega el contrato pasando el parámetro requerido
+  const myBasicNFT = await MyBasicNFT.deploy(initialOwner);
+  await myBasicNFT.waitForDeployment();
+
+  const contractAddress = await myBasicNFT.getAddress();
+  console.log("MyBasicNFT desplegado en:", contractAddress);
 }
 
-// Manejar errores y ejecutar la función principal
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;

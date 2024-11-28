@@ -19,6 +19,10 @@ import ConnectWallet from './components/ConnectWallet';
 import TokenSwap from './components/TokenSwap';
 import TournamentList from './components/TournamentList';
 import CreateTournament from './components/CreateTournament';
+import DeployNFTForm from './components/DeployNFTForm';
+import TransferNFTForm from './components/TransferNFTForm';
+import NFTList from './components/NFTList';
+import NFtMarketplace from './components/NFTMarketPlace';
 
 const Container = styled.div`
   background-color: ${props => props.theme.colors.base1};
@@ -126,6 +130,18 @@ const AppContent = () => {
             <NavLink to="/create-tournament"><span>Crear Torneo</span></NavLink>
           </NavItem>
           <NavItem>
+            <NavLink to="/deploy-nft"><span>Desplegar NFT</span></NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/transfer-nft"><span>Transferir NFT</span></NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/my-nfts"><span>Mis NFTs</span></NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/NFtMarketplace"><span>Marketplace</span></NavLink>
+          </NavItem>
+          <NavItem>
             <NavLink to="/login"><span>Login</span></NavLink>
           </NavItem>
         </NavList>
@@ -159,6 +175,10 @@ const AppContent = () => {
           <Route path="/items" element={<ItemList />} />
           <Route path="/tournaments" element={<TournamentList />} />
           <Route path="/create-tournament" element={<CreateTournament />} />
+          <Route path="/deploy-nft" element={<DeployNFTForm />} />
+          <Route path="/transfer-nft" element={<TransferNFTForm />} />
+          <Route path="/my-nfts" element={<NFTList />} />
+          <Route path="/NFtMarketplace" element={<NFtMarketplace />} />
         </Routes>
       </MainContent>
     </>

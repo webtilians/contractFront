@@ -1,9 +1,45 @@
 import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import TournamentABI from '../contracts/Tournament.json';
-
+import styled from 'styled-components';
 const tournamentAddress = '0x79211af64e801B2a8C7A416B9cdFf958b50Fae67';
 
+const FormContainer = styled.div`
+  position: relative;
+  width: 100%;
+  padding: 62px;
+  height: 400px;
+  background: linear-gradient(135deg, rgb(25 46 55), rgba(0, 121, 145, 1));
+  clip-path: polygon(47% -3%, 99% 30%, 88% 74%, 38% 92%, 8% 76%, 0% 24%);
+  box-shadow: 0 0 15px rgb(50 167 164);
+  background: repeating-radial-gradient(#193438, #95b0b2 340px);
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    width: 35%;
+    height: 57%;
+    background: inherit;
+    border: inherit;
+    clip-path: inherit;
+    transform: translateY(-50%) rotate(30deg);
+    top: 182px;
+    left: 176px;
+    z-index: -8;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    background: inherit;
+    border: inherit;
+    clip-path: inherit;
+    transform: translateY(-57%) rotate(0deg);
+    top: 225px;
+    left: 14px;
+    opacity: 0.4;
+    z-index: -1;
+  }
+`;
 const TournamentList = () => {
     const [tournaments, setTournaments] = useState([]);
     const [selectedTournament, setSelectedTournament] = useState(null);
@@ -45,7 +81,7 @@ const TournamentList = () => {
   };
 
   return (
-    <div>
+    <FormContainer>
       <h2>Torneos Disponibles</h2>
       {tournaments.map((tournament) => (
         <div key={tournament.id}>
@@ -67,7 +103,7 @@ const TournamentList = () => {
           </ul>
         </div>
       )}
-    </div>
+    </FormContainer>
   );
 };
 

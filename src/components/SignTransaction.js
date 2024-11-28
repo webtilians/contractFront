@@ -11,23 +11,21 @@ const SignTransactionContainer = styled.div`
   height: 100vh;
   text-align: center;
   color: white;
-  font-family: 'Roboto', sans-serif; /* Puedes cambiar esto a cualquier fuente sofisticada que prefieras */
+  font-family: 'Roboto', sans-serif;
 `;
 
 const Hexagon = styled.div`
   position: relative;
   width: 120px;
   height: 69.28px;
-  background: linear-gradient(135deg, rgba(38, 191, 227, 1), rgba(0, 121, 145, 1)); /* Azul degradado */
-  border: 4px solid rgba(255, 255, 255, 0.6); /* Bordes blancos translúcidos */
+  background: linear-gradient(135deg, rgba(38, 191, 227, 1), rgba(0, 121, 145, 1));
+  border: 4px solid rgba(255, 255, 255, 0.6);
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.8); /* Brillo */
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
 
   &::before, &::after {
     content: '';
     position: absolute;
-    // width: 100%;
-    // height: 100%;
     background: inherit;
     border: inherit;
     clip-path: inherit;
@@ -40,14 +38,14 @@ const Hexagon = styled.div`
 `;
 
 const FormContainer = styled.div`
-    position: relative;
-    width: 100%;
-    padding: 62px;
-    height: 400px;
-    background: linear-gradient(135deg, rgb(25 46 55), rgba(0, 121, 145, 1));
-    clip-path: polygon(47% -3%, 99% 30%, 88% 74%, 38% 92%, 8% 76%, 0% 24%);
-    box-shadow: 0 0 15px rgb(50 167 164);
-    background: repeating-radial-gradient(#193438, #95b0b2 340px);
+  position: relative;
+  width: 100%;
+  padding: 62px;
+  height: 400px;
+  background: linear-gradient(135deg, rgb(25 46 55), rgba(0, 121, 145, 1));
+  clip-path: polygon(47% -3%, 99% 30%, 88% 74%, 38% 92%, 8% 76%, 0% 24%);
+  box-shadow: 0 0 15px rgb(50 167 164);
+  background: repeating-radial-gradient(#193438, #95b0b2 340px);
   &::before, &::after {
     content: '';
     position: absolute;
@@ -65,18 +63,15 @@ const FormContainer = styled.div`
   &::after {
     content: '';
     position: absolute;
-    
     background: inherit;
     border: inherit;
     clip-path: inherit;
     transform: translateY(-57%) rotate(0deg);
-    
     top: 225px;
     left: 14px;
     opacity: 0.4;
     z-index: -1;
   }
-        
 `;
 
 const Title = styled.h1`
@@ -120,10 +115,8 @@ const SignTransaction = () => {
   const [destinationAddress, setDestinationAddress] = useState('');
   const [amount, setAmount] = useState('');
 
-  // Acceder a la dirección del wallet desde Redux
   const walletAddress = useSelector((state) => state.address);
 
-  // Función para firmar una transacción
   const signTransaction = async () => {
     if (!destinationAddress || !amount) {
       alert('Por favor, rellena todos los campos.');
@@ -140,7 +133,6 @@ const SignTransaction = () => {
         gasLimit: 21000,
       };
 
-      // Firmar y enviar la transacción
       const txResponse = await signer.sendTransaction(transaction);
       console.log('Transacción enviada:', txResponse);
       alert(`Transacción enviada con hash: ${txResponse.hash}`);
@@ -151,8 +143,7 @@ const SignTransaction = () => {
   };
 
   return (
-    <SignTransactionContainer> 
-      
+    <SignTransactionContainer>
       <FormContainer>
         <Title>Firmar Transacción</Title>
         <Input
