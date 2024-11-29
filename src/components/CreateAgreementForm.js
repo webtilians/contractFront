@@ -2,18 +2,36 @@ import React, { useState } from 'react';
 import { ethers } from 'ethers';
 import PersonalAgreement from '../contracts/PersonalAgreement.json';
 import { CONTRACT_ADDRESSES } from '../config.js';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
+
+const expandAnimation = keyframes`
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+`;
 const FormContainer = styled.div`
   position: relative;
     width: 100%;
     padding: 62px;
     height: 400px;
     background: linear-gradient(135deg, rgb(25 46 55), rgba(0, 121, 145, 1));
-    
+    display: flex;
+animation: ${expandAnimation} .5s ease-out; /* Aplicar la animación */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     clip-path: polygon(47% -3%, 99% 30%, 88% 74%, 38% 92%, 8% 76%, 0% 24%);
     box-shadow: 0 0 15px rgb(50 167 164);
-    background: repeating-radial-gradient(#193438, transparent 122px);
+    background: repeating-radial-gradient(#193438,  122px);
   &::before, &::after {
     content: '';
     position: absolute;
@@ -57,8 +75,19 @@ const Input = styled.input`
   margin: 0.5rem 0;
   border: 2px solid ${props => props.theme.colors.base2};
   border-radius: 5px;
-  width: 100%;
-  font-size: 1rem;
+  width: 300px;
+  font-size: .7rem;
+  background-color: ${props => props.theme.colors.base3};
+  color: ${props => props.theme.colors.base1};
+`;
+const Textarea = styled.input`
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border: 2px solid ${props => props.theme.colors.base2};
+  border-radius: 5px;
+  width: 300px;
+  height: 100px;
+  font-size: .7rem;
   background-color: ${props => props.theme.colors.base3};
   color: ${props => props.theme.colors.base1};
 `;
@@ -119,7 +148,7 @@ const CreateAgreementForm = () => {
     <FormContainer>
       <Title>Crear Acuerdo Personal</Title>
       <form onSubmit={handleCreateAgreement}>
-        <div>
+        <div style={{display:"flex"}}>
           <label>Dirección de la otra parte:</label>
           <Input
             type="text"
@@ -127,9 +156,9 @@ const CreateAgreementForm = () => {
             onChange={(e) => setParty2(e.target.value)}
           />
         </div>
-        <div>
+        <div style={{display:"flex"}}>
           <label>Términos del Acuerdo:</label>
-          <Input
+          <Textarea
             type="text"
             value={terms}
             onChange={(e) => setTerms(e.target.value)}

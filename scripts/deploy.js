@@ -3,19 +3,15 @@ const hre = require("hardhat");
 async function main() {
   await hre.run('compile');
 
-  // Obtén el signer (cuenta) que desplegará el contrato
   const [deployer] = await hre.ethers.getSigners();
-  const initialOwner = deployer.address; // Puedes usar la dirección del deployer o cualquier otra dirección
+  console.log("Desplegando contratos con la cuenta:", deployer.address);
 
-  // Obtén la fábrica del contrato
-  const MyBasicNFT = await hre.ethers.getContractFactory("MyNFT");
+  const Lottery = await hre.ethers.getContractFactory("Lottery");
+  const lottery = await Lottery.deploy(deployer.address);
+  await lottery.waitForDeployment();
 
-  // Despliega el contrato pasando el parámetro requerido
-  const myBasicNFT = await MyBasicNFT.deploy(initialOwner);
-  await myBasicNFT.waitForDeployment();
-
-  const contractAddress = await myBasicNFT.getAddress();
-  console.log("MyBasicNFT desplegado en:", contractAddress);
+  const contractAddress = await lottery.getAddress();
+  console.log("Lottery desplegado en:", contractAddress);
 }
 
 main().catch((error) => {

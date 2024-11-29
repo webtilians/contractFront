@@ -8,7 +8,7 @@ const SignTransactionContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  
   text-align: center;
   color: white;
   font-family: 'Roboto', sans-serif;

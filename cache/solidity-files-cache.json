@@ -1056,6 +1056,44 @@
       "artifacts": [
         "MyNFT"
       ]
+    },
+    "C:\\Users\\ENRIQUE\\token-exchange-frontend\\contracts\\Lotery.sol": {
+      "lastModificationDate": 1732841444748,
+      "contentHash": "26c3105c78b2d0d65c2a6a6d524a55dc",
+      "sourceName": "contracts/Lotery.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/access/Ownable.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "Lottery"
+      ]
     }
   }
 }
